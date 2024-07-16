@@ -1,0 +1,5 @@
+# TODO
+
+* Configure reverse proxy?
+* Or... set up local TLS certs?
+* Do we need to secure the connection into Comentario?
