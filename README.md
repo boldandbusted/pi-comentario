@@ -1,4 +1,4 @@
-# Commentario-pi
+# Comentario-pi
 
 This repo should represent a custom installation of Comentario.
 
