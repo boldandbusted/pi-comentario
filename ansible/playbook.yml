@@ -1,0 +1,9 @@
+---
+- name: Example play
+  hosts: all
+  remote_user: root
+
+  tasks:
+    - name: Output uname -a
+      ansible.builtin.shell: "uname -a"
+

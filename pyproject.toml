@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pi-commentario"
+version = "0.1.0"
+description = "Local install of Commentario, destined for a Raspberry Pi"
+authors = ["Jesse Adelman <jesse@boldandbusted.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+ansible-core = "^2.16"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
