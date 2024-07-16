@@ -1,0 +1,4 @@
+[submodule "ansible/roles/ext_postgresql"]
+	path = ansible/roles/ext_postgresql
+	url = https://github.com/geerlingguy/ansible-role-postgresql
+	branch = tag:3.5.2
