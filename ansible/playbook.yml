@@ -5,5 +5,3 @@
 
   roles:
     - role: "common"
-    - role: "ext_postgresql"
-      become: true

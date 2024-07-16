@@ -3,3 +3,31 @@
 
 - name: "Run uname -a"
   ansible.builtin.shell: "uname -a"
+
+- name: "Install podman"
+  ansible.builtin.apt:
+    name: podman-compose
+    state: present
+  become: true
+
+- name: "Copy Podman Compose file"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/podman-compose.yml"
+    dest: "~/podman-compose.yml"
+
+- name: "Copy secrets file"
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/secrets.yaml"
+    dest: "~/secrets.yaml"
+
+- name: Check if reboot is required
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required
+
+- name: Reboot if required
+  reboot:
+  when: reboot_required.stat.exists == true
+
+- name: Run podman-compose up
+  ansible.builtin.shell: "podman-compose up"
