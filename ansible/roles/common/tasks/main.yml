@@ -4,7 +4,7 @@
 - name: "Run uname -a"
   ansible.builtin.shell: "uname -a"
 
-- name: "Install podman"
+- name: "Install podman-compose"
   ansible.builtin.apt:
     name: podman-compose
     state: present
@@ -29,5 +29,10 @@
   reboot:
   when: reboot_required.stat.exists == true
 
+- name: Check file listing
+  ansible.builtin.shell: "pwd; ls -latr"
+
 - name: Run podman-compose up
-  ansible.builtin.shell: "podman-compose up"
+  ansible.builtin.shell: 
+    cmd: "podman-compose up -d"
+    chdir: "~/"
