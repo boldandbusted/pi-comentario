@@ -1,2 +1,5 @@
 ---
 # tasks file for common
+
+- name: "Run uname -a"
+  ansible.builtin.shell: "uname -a"

@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
     )
     shell.inline = content
-    shell.reboot = true
+    shell.reboot = false
   end
 
   config.vm.provision 'shell' do |shell|
