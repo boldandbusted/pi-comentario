@@ -1,5 +1,8 @@
 # TODO
 
 * Configure reverse proxy?
-* Or... set up local TLS certs?
+  * Certbot for Let's Encrypt
 * Do we need to secure the connection into Comentario?
+* Backup DB with pg_dumpall.
+ - Configure /backups as volume in host OS as target for DB dumps.
+ 
