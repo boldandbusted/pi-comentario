@@ -58,8 +58,4 @@ Vagrant.configure("2") do |config|
     #  admin_user: 'ubuntu'
     #}
   end
-
-  config.vm.provision 'shell' do |reboot|
-    reboot.reboot = true
-  end
 end
