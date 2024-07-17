@@ -10,15 +10,30 @@
     state: present
   become: true
 
+- name: "Create comentario user"
+  ansible.builtin.user:
+    name: comentario
+    comment: "Comentario user"
+    shell: /bin/bash
+    groups: sudo,netdev,dip,plugdev
+    append: true
+  become: true
+
 - name: "Copy Podman Compose file"
   ansible.builtin.copy:
     src: "{{ role_path }}/files/podman-compose.yml"
-    dest: "~/podman-compose.yml"
+    dest: "~comentario/podman-compose.yml"
+    owner: "comentario"
+    mode: 0400
+  become: true
 
 - name: "Copy secrets file"
   ansible.builtin.copy:
     src: "{{ role_path }}/files/secrets.yaml"
-    dest: "~/secrets.yaml"
+    dest: "~comentario/secrets.yaml"
+    owner: "comentario"
+    mode: 0400
+  become: true
 
 - name: Check if reboot is required
   stat:
@@ -30,9 +45,29 @@
   when: reboot_required.stat.exists == true
 
 - name: Check file listing
-  ansible.builtin.shell: "pwd; ls -latr"
+  ansible.builtin.shell: "cd ~comentario; pwd; ls -latr"
+  become: true
+
+- name: Create /backup directory for DB backups
+  ansible.builtin.file:
+    path: "/backup"
+    state: directory
+    mode: 0777
+  become: true
 
 - name: Run podman-compose up
   ansible.builtin.shell: 
-    cmd: "podman-compose up -d"
-    chdir: "~/"
+    cmd: "sudo -u comentario podman-compose up -d"
+    chdir: "~comentario/"
+  become: true
+
+- name: Create cron job for backups
+  ansible.builtin.cron:
+    name: "Backup DB"
+    user: "comentario"
+    hour: 06
+    minute: 16
+    # podman exec -u postgres -it -w /tmp vagrant_db_1 pg_dumpall > blah.sql
+    job: "podman exec -u postgres -w /backup comentario_db_1 pg_dumpall > /backup/db_backup-`date '+%Y%m%d%H%M'`.sql && gzip /backup/db_backup-`date '+%Y%m%d%H%M'`.sql"
+  become: yes
+ 
