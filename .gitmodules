@@ -2,3 +2,6 @@
 	path = ansible/roles/ext_postgresql
 	url = https://github.com/geerlingguy/ansible-role-postgresql
 	branch = tag:3.5.2
+[submodule "ansible/roles/ext_nginx"]
+	path = ansible/roles/ext_nginx
+	url = https://github.com/geerlingguy/ansible-role-nginx.git
