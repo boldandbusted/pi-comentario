@@ -4,4 +4,6 @@
   remote_user: root
 
   roles:
+    - role: "ext_nginx"
+      become: true
     - role: "common"
