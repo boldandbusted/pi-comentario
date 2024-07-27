@@ -5,4 +5,9 @@
 * Do we need to secure the connection into Comentario?
 * Backup DB with pg_dumpall.
  - Configure /backups as volume in host OS as target for DB dumps.
+
+# Issues
+
+* Validate that the Comento container stays up between VM suspensions
+
  
